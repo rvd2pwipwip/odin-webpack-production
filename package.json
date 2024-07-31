@@ -1,0 +1,19 @@
+{
+  "name": "odin-webpack-demo",
+  "version": "1.0.0",
+  "description": "odin class at  https://www.theodinproject.com/lessons/node-path-javascript-webpack",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
