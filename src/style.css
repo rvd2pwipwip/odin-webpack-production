@@ -1,0 +1,14 @@
+@font-face {
+  font-family: norse;
+  src:  url('./Norse-Bold.woff') format('woff'),
+        url('./Norse-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.hello {
+  font-family: 'norse';
+  font-size: 3rem;
+  color: red;
+  background: url('./thumbnail.png');
+}
