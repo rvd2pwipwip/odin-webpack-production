@@ -2,21 +2,33 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
     index: './src/index.js',
     print: './src/print.js',
+  },
+  devtool: 'inline-source-map',
+  // webpack-dev-server serves bundled files from the directory defined in output.path
+  devServer: {
+    // ensure that the server and page automatically reloads whenever you modify template HTML file
+    watchFiles: ['./src/template.html'],
+    static: './dist',
   },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-  mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      // title: 'Development',
+      template: './src/template.html',
     }),
   ],
+  //to ensure no module duplication, even with more than one entry point
+  optimization: {
+    runtimeChunk: 'single',
+  },
   module: {
     rules: [
       {
