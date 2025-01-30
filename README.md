@@ -34,3 +34,64 @@ To avoid having to manually edit the configuration file every time you wish to s
 "dev": "webpack serve --config webpack.dev.js"
 
 ```
+## Webpack merge
+> Webpack documentation: https://webpack.js.org/guides/production/
+In **development**, we want strong source mapping and a localhost server with live reloading or hot module replacement.
+In **production**, our goals shift to minified bundles, lighter weight source maps, and optimized assets to improve load time.
+
+With separate production and development configurations, maintain a "common" configuration to keep things DRY with `webpack-merge`.
+```
+npm install --save-dev webpack-merge
+```
+Replace `webpack.config.js` with `webpack.common.js`:
+```
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: {
+    app: './src/index.js',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Production',
+    }),
+  ],
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(csv|tsv)$/i,
+        use: ['csv-loader'],
+      },
+      {
+        test: /\.xml$/i,
+        use: ['xml-loader'],
+      },
+    ],
+  },
+};
+```
+
+
+
+## Template repositories
+When creating a new repository on Github, there is an option near the top for a `Repository template`.
+
+Check this box to have the `Repository template` dropdown with templates to select when creating a new repository.
