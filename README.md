@@ -20,3 +20,7 @@ For example:
   // ...
 }
 ```
+- `npm run build` is the same as running `npx webpack`
+- `npm run dev` is the same as `npx webpack serve`
+- `npm run deploy` runs `git subtree push --prefix dist origin gh-pages`
+> We only needed `npx` to run them directly in the terminal without npm scripts.
