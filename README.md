@@ -45,6 +45,7 @@ npm install --save-dev webpack-merge
 ```
 Replace `webpack.config.js` with `webpack.common.js`:
 ```
+// webpack.common.js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -62,34 +63,34 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(csv|tsv)$/i,
-        use: ['csv-loader'],
-      },
-      {
-        test: /\.xml$/i,
-        use: ['xml-loader'],
-      },
-    ],
-  },
+  ...
 };
 ```
+`webpack.dev.js`:
+```
+// webpack.dev.js
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 
+module.exports = merge(common, {
+  mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    static: './dist',
+  },
+});
+```
+`webpack.prod.js`:
+```
+// webpack.prod.js
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 
+module.exports = merge(common, {
+  mode: 'production',
+  devtool: 'source-map',
+});
+```
 
 ## Template repositories
 When creating a new repository on Github, there is an option near the top for a `Repository template`.
