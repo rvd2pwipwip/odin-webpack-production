@@ -10,12 +10,13 @@ Scripts can be written in the form `"name": "command"`, and are executed by runn
 For example:
 ```
 {
-  // ... other package.json stuff
+  // package.json
+  // ...
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
-  // ... other package.json stuff
+  // ...
 }
 ```
