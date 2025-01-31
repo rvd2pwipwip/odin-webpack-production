@@ -66,6 +66,8 @@ module.exports = {
   ...
 };
 ```
+`webpack.common.js`, sets up the entry and output configuration and any plugins required for both environments.
+
 `webpack.dev.js`:
 ```
 // webpack.dev.js
@@ -80,6 +82,8 @@ module.exports = merge(common, {
   },
 });
 ```
+`webpack.dev.js` sets mode to development, recommended devtool for that environment (strong source mapping), and devServer configuration.
+
 `webpack.prod.js`:
 ```
 // webpack.prod.js
@@ -91,6 +95,9 @@ module.exports = merge(common, {
   devtool: 'source-map',
 });
 ```
+`webpack.prod.js`, sets mode to production which loads TerserPlugin.
+
+> Note the use of `merge()` calls in the environment-specific configurations to include our common configuration in `webpack.dev.js` and `webpack.prod.js`.
 
 ## Template repositories
 When creating a new repository on Github, there is an option near the top for a `Repository template`.
